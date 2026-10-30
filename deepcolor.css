@@ -4,24 +4,79 @@
 #fcitx-theme {
   --scroll-animation: max-block-size 280ms cubic-bezier(.22,.61,.36,1);
   --dc-corner-radius: 12px;
-  --dc-ornament-outset: 8px;
+  --dc-ornament-outset: 11px;
+  --dc-ornament-size: 40px;
+  --dc-art-right-pos: right 0px top -6px;
+  --dc-art-left-pos: left 0px bottom -12px;
+  --dc-art-size: 168px 180px;
   --dc-surface:
-    radial-gradient(ellipse at 100% 0%,rgba(176,157,191,.15),transparent 62%),
-    linear-gradient(112deg,#f5f3f8,#eef2f2 68%,#eef4ef);
-  --dc-popup: #f1eff5;
-  --dc-rim: linear-gradient(110deg,#b2c6c0,#b5a8c1 55%,#b9c59e);
+    url("assets/panel-art-right.png?v=235") no-repeat var(--dc-art-right-pos) / var(--dc-art-size),
+    url("assets/panel-art-left.png?v=235") no-repeat var(--dc-art-left-pos) / var(--dc-art-size),
+    linear-gradient(180deg,rgba(255,255,255,.68),rgba(255,255,255,.22) 34px,rgba(232,238,245,.18) 34px,rgba(255,255,255,0) 64px),
+    radial-gradient(118px 56px at 36px 0px,rgba(56,204,238,.20),transparent 100%),
+    radial-gradient(136px 62px at calc(100% - 38px) 0px,rgba(164,116,222,.20),transparent 100%),
+    radial-gradient(ellipse at 0% 100%,rgba(78,178,196,.15),transparent 58%),
+    linear-gradient(114deg,#f4f3f9,#eaf2f5 58%,#ecf4f0);
+  --dc-popup: #f3f1f8;
+  --dc-rim: linear-gradient(112deg,#74c2d4,#a68fcb 52%,#8bc0b6);
+  --dc-header-rule: linear-gradient(90deg,rgba(62,178,208,.24),rgba(142,98,204,.28) 48%,rgba(104,174,186,.18) 82%,transparent 98%);
+  --dc-divider: rgba(98,124,132,.26);
+  --dc-hover-bg: rgba(98,132,142,.10);
+  --dc-active-bg: rgba(98,132,142,.17);
+  --dc-highlight-bg:
+    linear-gradient(180deg,rgba(255,255,255,.20),rgba(255,255,255,0) 54%),
+    linear-gradient(115deg,#3d6b78,#685480 65%,#785d8c);
+  --dc-highlight-hover-bg:
+    linear-gradient(180deg,rgba(255,255,255,.24),rgba(255,255,255,0) 54%),
+    linear-gradient(115deg,#36626e,#5f4c76 65%,#6f5482);
+  --dc-highlight-ring:
+    inset 0 1px 0 rgba(255,255,255,.48),
+    inset 0 0 0 1px rgba(212,244,252,.32),
+    0 2px 6px rgba(52,68,104,.18);
+  --dc-scrollbar: rgba(112,104,136,.28);
+  --dc-scrollbar-hover: rgba(94,86,118,.44);
+  --dc-ornament-shadow: drop-shadow(0 1px 2px rgba(28,32,48,.20));
 }
 #fcitx-theme.fcitx-dark {
   --dc-surface:
-    radial-gradient(ellipse at 100% 0%,rgba(133,111,149,.12),transparent 62%),
-    linear-gradient(112deg,#242532,#2d2b38 58%,#243231);
-  --dc-popup: #292b37;
-  --dc-rim: linear-gradient(110deg,#91b8ab,#a294ad 55%,#a6b67b);
+    url("assets/panel-art-right.png?v=235") no-repeat var(--dc-art-right-pos) / var(--dc-art-size),
+    url("assets/panel-art-left.png?v=235") no-repeat var(--dc-art-left-pos) / var(--dc-art-size),
+    linear-gradient(180deg,rgba(224,242,255,.055),rgba(14,18,28,.16) 34px,rgba(255,255,255,.018) 34px,rgba(255,255,255,0) 64px),
+    radial-gradient(118px 56px at 36px 0px,rgba(54,202,238,.22),transparent 100%),
+    radial-gradient(136px 62px at calc(100% - 38px) 0px,rgba(162,106,226,.22),transparent 100%),
+    radial-gradient(ellipse at 0% 100%,rgba(52,162,188,.16),transparent 58%),
+    linear-gradient(114deg,#1b2030,#242235 56%,#1a2a31);
+  --dc-popup: #232636;
+  --dc-rim: linear-gradient(112deg,#6cc6db,#9f84c9 52%,#76bfb3);
+  --dc-header-rule: linear-gradient(90deg,rgba(78,204,232,.30),rgba(176,122,238,.36) 48%,rgba(98,196,214,.22) 82%,transparent 98%);
+  --dc-divider: rgba(158,194,204,.22);
+  --dc-hover-bg: rgba(186,220,228,.09);
+  --dc-active-bg: rgba(186,220,228,.15);
+  --dc-highlight-bg:
+    linear-gradient(180deg,rgba(216,246,255,.15),rgba(216,246,255,0) 54%),
+    linear-gradient(115deg,#2f5d6c,#584770 64%,#6c5082);
+  --dc-highlight-hover-bg:
+    linear-gradient(180deg,rgba(216,246,255,.19),rgba(216,246,255,0) 54%),
+    linear-gradient(115deg,#356676,#604e79 64%,#75578c);
+  --dc-highlight-ring:
+    inset 0 1px 0 rgba(196,242,255,.44),
+    inset 0 0 0 1px rgba(188,226,242,.26),
+    0 2px 7px rgba(0,0,0,.30);
+  --dc-scrollbar: rgba(186,182,212,.26);
+  --dc-scrollbar-hover: rgba(208,204,232,.42);
+  --dc-ornament-shadow: drop-shadow(0 1.5px 3px rgba(6,10,18,.46));
+}
+#fcitx-theme:has(.fcitx-horizontal-scroll) {
+  --dc-art-right-pos: right 0px top 0px;
+  --dc-art-left-pos: left 0px bottom 0px;
+  --dc-art-size: 206px 220px;
 }
 #fcitx-theme .fcitx-panel {
   position: relative;
   border-radius: var(--dc-corner-radius) !important;
   background: var(--dc-surface) !important;
+  background-origin: border-box !important;
+  background-clip: border-box !important;
 }
 /* The fixed frame paints artwork at native viewport bounds. The measured
    content panel keeps its original layout and native shadow geometry. */
@@ -49,17 +104,17 @@
 #fcitx-theme .fcitx-panel:not(.dc-layout-panel) { overflow: visible !important; }
 #fcitx-theme .fcitx-panel-blur {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   overflow: hidden;
   border-radius: 10px;
 }
 #fcitx-theme .fcitx-panel::before {
   content: "";
   position: absolute;
-  inset: -3px;
-  z-index: 3;
+  inset: -2px;
+  z-index: 1;
   padding: 1px;
-  border-radius: 13px;
+  border-radius: var(--dc-corner-radius);
   background: var(--dc-rim);
   -webkit-mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -68,17 +123,18 @@
 }
 /* The four fixed caps wrap the OUTSIDE of the surface. The existing
    native 25px left/top allowance and 24px/32px right/bottom shadow bounds
-   contain the 8px overhang without changing candidate/window geometry. */
+   contain the overhang without changing candidate/window geometry. */
 #fcitx-theme .fcitx-panel::after {
   content: "";
   position: absolute;
   inset: calc(-1 * var(--dc-ornament-outset));
-  z-index: 0;
+  z-index: 2;
   border: 0 solid transparent;
-  border-image-source: url("assets/character-corners.png");
+  border-image-source: url("assets/character-corners.png?v=233");
   border-image-slice: 50%;
-  border-image-width: 30px;
+  border-image-width: var(--dc-ornament-size);
   border-image-repeat: stretch;
+  filter: var(--dc-ornament-shadow);
   clip-path: none;
   pointer-events: none;
 }
@@ -94,13 +150,68 @@
 #fcitx-theme.fcitx-dark .fcitx-contextmenu {
   box-shadow: 0 8px 24px rgba(0,0,0,.25) !important;
 }
-#fcitx-theme .fcitx-highlighted > .fcitx-candidate-inner {
-  background-image: linear-gradient(115deg,#537478,#776580);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.37),0 2px 6px rgba(74,91,151,.16);
+#fcitx-theme .fcitx-header:has(.fcitx-preedit:not(.fcitx-hidden),.fcitx-aux-up:not(.fcitx-hidden)) {
+  background-image: var(--dc-header-rule);
+  background-size: calc(100% - 14px) 1px;
+  background-position: 7px 100%;
+  background-repeat: no-repeat;
 }
-#fcitx-theme.fcitx-dark .fcitx-highlighted > .fcitx-candidate-inner {
-  background-image: linear-gradient(115deg,#3f6266,#6a5576);
-  box-shadow: inset 0 0 0 1px rgba(221,232,204,.35),0 2px 6px rgba(0,0,0,.17);
+#fcitx-theme .fcitx-caret.fcitx-no-text {
+  border-radius: 1px;
+}
+#fcitx-theme .fcitx-label {
+  font-variant-numeric: tabular-nums;
+}
+#fcitx-theme .fcitx-hoverable:not(.fcitx-highlighted):hover > .fcitx-hoverable-inner {
+  background-color: var(--dc-hover-bg);
+}
+#fcitx-theme .fcitx-hoverable:not(.fcitx-highlighted):active > .fcitx-hoverable-inner {
+  background-color: var(--dc-active-bg);
+}
+#fcitx-theme .fcitx-highlighted > .fcitx-candidate-inner {
+  position: relative;
+  overflow: hidden;
+  background-image: var(--dc-highlight-bg);
+  box-shadow: var(--dc-highlight-ring);
+}
+#fcitx-theme .fcitx-highlighted > .fcitx-candidate-inner::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  bottom: -3px;
+  width: 18px;
+  height: 18px;
+  background-image: url("assets/character-corners.png?v=233");
+  background-size: 200% 200%;
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  opacity: .36;
+  transform: scaleX(-1);
+  pointer-events: none;
+}
+#fcitx-theme .fcitx-mousemoved .fcitx-highlighted:hover:not(:active) > .fcitx-candidate-inner {
+  background-image: var(--dc-highlight-hover-bg);
+  box-shadow: var(--dc-highlight-ring);
+}
+#fcitx-theme .fcitx-highlighted:active > .fcitx-candidate-inner {
+  background-image: var(--dc-highlight-bg);
+  box-shadow: var(--dc-highlight-ring);
+  filter: brightness(.96);
+}
+#fcitx-theme .fcitx-horizontal .fcitx-divider-paging .fcitx-divider-middle {
+  background: linear-gradient(180deg,transparent,var(--dc-divider) 20%,var(--dc-divider) 80%,transparent) !important;
+}
+#fcitx-theme .fcitx-scroll-area::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+#fcitx-theme .fcitx-scroll-area::-webkit-scrollbar-thumb {
+  background-color: var(--dc-scrollbar) !important;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  border-radius: 4px;
+}
+#fcitx-theme .fcitx-scroll-area::-webkit-scrollbar-thumb:hover {
+  background-color: var(--dc-scrollbar-hover) !important;
 }
 #fcitx-theme .fcitx-horizontal-scroll > .fcitx-scroll-area {
   animation: dc-unfold-fade 180ms ease-out;
@@ -108,7 +219,29 @@
 #fcitx-theme.dc-theme .fcitx-panel-top {
   position: relative;
   height: 64px;
+  z-index: 4;
   pointer-events: none;
+}
+#fcitx-theme.dc-theme .fcitx-panel-top::before {
+  content: "";
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  left: 8px;
+  bottom: -6px;
+  z-index: 4;
+  background-image: url("assets/tentacle-summon-atlas.png?v=233");
+  background-size: 2500% 200%;
+  background-position: 0% 0%;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 2px 4px rgba(10,14,24,.24));
+  pointer-events: none;
+}
+#fcitx-theme.dc-idle .fcitx-panel-top::before {
+  animation: dc-sheet-idle 4.8s infinite;
+}
+#fcitx-theme.dc-typing .fcitx-panel-top::before {
+  animation: dc-sheet-type 2.0s steps(24,end) infinite;
 }
 .dc-mascot {
   position: absolute;
@@ -116,32 +249,38 @@
   height: 72px;
   right: 2px;
   bottom: -8px;
-  z-index: 2;
+  z-index: 4;
+  filter: drop-shadow(0 2px 4px rgba(14,16,24,.22));
   pointer-events: none;
   user-select: none;
   contain: layout style;
 }
 .dc-sprite {
   width: 100%; height: 100%;
-  background-size: 200% 200%;
-  background-position: 0 0;
+  background-image: url("assets/deepcolor-atlas.png?v=233") !important;
+  background-size: 2500% 200%;
+  background-position: 0% 0%;
   background-repeat: no-repeat;
-  transform-origin: 50% 95%;
 }
-.dc-idle .dc-sprite { animation: dc-blink 5.6s steps(1,end) infinite; }
-.dc-typing .dc-sprite { animation: dc-type 260ms steps(1,end) infinite; }
-@keyframes dc-blink {
-  0%,91%,98%,100% { background-position: 0 0; transform: translate(0,0); }
-  93%,96% { background-position: 100% 0; transform: translate(2.584px,0); }
+.dc-idle .dc-sprite { animation: dc-sheet-idle 5.6s infinite; }
+.dc-typing .dc-sprite { animation: dc-sheet-type 2.2s steps(24,end) infinite; }
+@keyframes dc-sheet-idle {
+  0%, 56% {
+    background-position: 0% 0%;
+    animation-timing-function: steps(24,end);
+  }
+  100% {
+    background-position: 100% 0%;
+  }
 }
-@keyframes dc-type {
-  0%,100% { background-position: 0 100%; transform: translate(.115px,.574px); }
-  50% { background-position: 100% 100%; transform: translate(2.699px,.574px); }
+@keyframes dc-sheet-type {
+  from { background-position: 0% 100%; }
+  to { background-position: 100% 100%; }
 }
 @keyframes dc-unfold-fade { from { opacity: .78; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) {
   #fcitx-theme.dc-theme { --scroll-animation: none; }
   #fcitx-theme .fcitx-horizontal-scroll > .fcitx-scroll-area { animation: none; }
-  .dc-mascot,.dc-sprite { animation: none !important; }
-  .dc-typing .dc-sprite { background-position: 0 100%; transform: translate(.115px,.574px); }
+  #fcitx-theme.dc-theme .fcitx-panel-top::before,.dc-mascot,.dc-sprite { animation: none !important; }
+  #fcitx-theme.dc-typing .fcitx-panel-top::before,.dc-typing .dc-sprite { background-position: 0% 100%; }
 }

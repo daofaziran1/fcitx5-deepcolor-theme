@@ -3,7 +3,7 @@
 (() => {
   'use strict';
   const scriptURL = document.currentScript && document.currentScript.src;
-  const atlasURL = new URL('../assets/deepcolor-atlas.png', scriptURL || location.href).href;
+  const atlasURL = new URL('../assets/deepcolor-atlas.png?v=230', scriptURL || location.href).href;
   const fcitx = window.fcitx;
   const key = '__deepcolorTypingPlugin';
   const idleDelay = 900;

@@ -1,5 +1,5 @@
 {
-  "version": "2.1.1",
+  "version": "2.3.0",
   "verified": true,
   "Advanced": {
     "CopyHtml": "",
@@ -36,6 +36,10 @@
   "onlyNativeConfigChange": "Advanced.UserCss",
   "nativeCandidateGeometryUnchanged": true,
   "pluginUnchanged": true,
-  "cornerArtUnchanged": true,
-  "assetHash": "3aa2f78f74045a2e727a01f332256c5bc116ce26991d7d594ca9328eba99c4a1"
+  "cornerArtUnchanged": false,
+  "assetHash": "8ff2904b53119af03828545ae28a13b6cf47e9dec22552b0fc66c932257eaf79",
+  "summonAtlasHash": "3e561e6d768fe429e5ea28b1f6bfe43df331d4cbe1ac3c86ea31e90bd31d4b64",
+  "mascotAtlasHash": "d6ec59e7235fa40f9be4914f58e708b3d12b47b9abb1d85bdd26bb1935f6c7c1",
+  "panelArtLeftHash": "3f79f4f91b7c1a8c0331d36e7c6d435ce3bc728b167f973d490dab0aef6e0e85",
+  "panelArtRightHash": "4e74702d145b9c7bb8f431223c51fd8ca206fd19faa29589c163a6604f5dd37c"
 }

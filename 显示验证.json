@@ -3,46 +3,46 @@
   "frontend": "same-version native frontend with demo candidate text",
   "cases": [
     {
-      "capSize": "30px",
+      "capSize": "40px",
       "height": 72,
       "ornamentClip": "none",
-      "outset": "-8px",
+      "outset": "-11px",
       "panelOverflow": "visible",
       "preedit": "ni hao",
       "width": 160.015625
     },
     {
-      "capSize": "30px",
+      "capSize": "40px",
       "height": 72,
       "ornamentClip": "none",
-      "outset": "-8px",
+      "outset": "-11px",
       "panelOverflow": "visible",
       "preedit": "ni hao",
       "width": 781.4921875
     },
     {
-      "capSize": "30px",
+      "capSize": "40px",
       "height": 208,
       "mode": "expanded",
       "ornamentClip": "none",
-      "outset": "-8px",
+      "outset": "-11px",
       "panelOverflow": "visible",
       "preedit": "ni hao",
       "width": 518
     },
     {
-      "capSize": "30px",
+      "capSize": "40px",
       "height": 72,
       "mode": "extra-long",
       "ornamentClip": "none",
-      "outset": "-8px",
+      "outset": "-11px",
       "panelOverflow": "visible",
       "width": 1341.5
     }
   ],
   "nativeWindowSimulation": {
     "bodyClip": "inset(0px round 12px)",
-    "caps": "30px",
+    "caps": "40px",
     "entireOrnamentFits": true,
     "nativeViewport": {
       "height": 193,
@@ -50,10 +50,10 @@
     },
     "onlyOuterArt": "hidden",
     "ornamentBounds": {
-      "bottom": 167,
-      "left": 19,
-      "right": 412.4921875,
-      "top": 83
+      "bottom": 170,
+      "left": 16,
+      "right": 415.4921875,
+      "top": 80
     },
     "ornamentClip": "none",
     "overflow": "visible",

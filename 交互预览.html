@@ -4,25 +4,55 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>深海色 · 人物联动角饰</title>
 <style>
-body.preview-page{margin:0;padding:32px 28px;width:auto;height:auto;min-height:100vh;overflow:auto;background:#0e1728;color:#e5efff;font-family:-apple-system,"PingFang SC",sans-serif;box-sizing:border-box}
-main{max-width:1480px;margin:auto}h1{margin:4px 0 10px;font-size:26px;font-weight:550;letter-spacing:.015em}.intro{font-size:13px;line-height:1.8;color:#b1c4df}
-.stage{margin:22px 0 18px;padding:20px 22px 32px;min-height:164px;background:#18253b;border:1px solid #334764;border-radius:18px;overflow:auto}#candidate-root{width:max-content;min-height:145px}
-.controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.controls input{min-width:220px;flex:1;padding:12px 14px;border:1px solid #526985;border-radius:8px;background:#16253c;color:#e5efff;font:14px -apple-system,"PingFang SC",sans-serif;caret-color:#9edfff}.controls input::placeholder{color:#acc0db}.controls input:focus{outline:2px solid #8fc6ff;outline-offset:2px}.controls button{padding:11px 13px;border:1px solid #526985;border-radius:8px;background:#1b2e49;color:#d5e6ff;font:12px -apple-system,"PingFang SC",sans-serif;cursor:pointer}.controls button:hover{background:#2c4566}.controls button:focus-visible{outline:2px solid #8fc6ff;outline-offset:2px}.status{margin-top:14px;color:#b1c4df;font-size:12px}.note{margin-top:12px;max-width:75ch;color:#a9bddb;font-size:12px;line-height:1.8}
-body.day{background:#eaf0f8;color:#203451}body.day .intro,body.day .note,body.day .status{color:#4c6281}body.day .stage{background:#f8faff;border-color:#c7d6e9}body.day .controls input{background:white;border-color:#9bb1cd;color:#203451}body.day .controls input::placeholder{color:#4e6482}body.day .controls button{background:#f6f9ff;color:#34547b;border-color:#9bb1cd}body.day .controls button:hover{background:#e1ecfb}
-body::selection{background:#7a9be0;color:white}
-@media(max-width:600px){body.preview-page{padding:24px 16px}.stage{padding:12px 12px 24px}h1{font-size:23px}.controls input{min-width:180px}.controls button{flex:1;white-space:nowrap}}
-
-
-
+body.preview-page{margin:0;padding:36px 28px 44px;width:auto;height:auto;min-height:100vh;overflow:auto;background:radial-gradient(ellipse at 18% 0%,#1f2233 0%,#131622 68%);color:#ece8f4;font-family:-apple-system,"PingFang SC",sans-serif;box-sizing:border-box}
+main{max-width:1480px;margin:auto}
+.header-bar{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px}
+h1{margin:0;font-size:24px;font-weight:600;letter-spacing:-.01em;color:#f4f1fa}
+.intro{margin-top:6px;font-size:13px;line-height:1.7;color:#bdb6ca}
+.stage{margin:20px 0 16px;padding:24px 26px 34px;min-height:164px;background:radial-gradient(ellipse at 75% 15%,rgba(148,124,168,.12),transparent 58%),linear-gradient(135deg,#1b1d2a,#21202d 56%,#1b2627);border:1px solid rgba(182,174,198,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 14px 36px rgba(6,8,14,.36);border-radius:16px;overflow:auto}
+#candidate-root{width:max-content;min-height:145px}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.controls input{min-width:240px;flex:1 1 260px;padding:10px 14px;border:1px solid rgba(180,172,196,.32);border-radius:9px;background:#181a26;color:#f2eef8;font:13.5px -apple-system,"PingFang SC",sans-serif;caret-color:#d8e957;transition:border-color 140ms ease,box-shadow 140ms ease}
+.controls input::placeholder{color:#9e96ad}
+.controls input:focus{outline:2px solid #b8d8be;outline-offset:1px;border-color:#9ab8b0}
+.btn-group{display:inline-flex;flex-wrap:wrap;align-items:center;gap:4px;padding:3px;border:1px solid rgba(180,172,196,.2);border-radius:10px;background:rgba(22,24,35,.65)}
+.controls button{padding:7px 12px;border:1px solid transparent;border-radius:7px;background:transparent;color:#d8d2e3;font:500 12px -apple-system,"PingFang SC",sans-serif;cursor:pointer;transition:background-color 120ms ease,color 120ms ease,border-color 120ms ease}
+.controls button:hover{background:rgba(190,182,208,.12);color:#f5f2fa}
+.controls button[aria-pressed="true"]{background:linear-gradient(115deg,#3b6165,#5c4c6b);color:#f7f5fb;border-color:rgba(224,238,204,.34);box-shadow:0 1px 4px rgba(0,0,0,.24)}
+.controls button.action-btn{padding:8px 13px;border:1px solid rgba(180,172,196,.26);border-radius:9px;background:#212332}
+.controls button.action-btn:hover{background:#2b2d40;border-color:rgba(196,188,212,.4)}
+.controls button:focus-visible{outline:2px solid #b8d8be;outline-offset:2px}
+.status{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:999px;background:rgba(154,184,176,.12);border:1px solid rgba(154,184,176,.26);color:#d0e4de;font-size:12px;font-weight:500}
+.status::before{content:"";width:7px;height:7px;border-radius:50%;background:#9ab8b0}
+.status[data-active="true"]{background:rgba(216,233,87,.14);border-color:rgba(216,233,87,.38);color:#eef6b6}
+.status[data-active="true"]::before{background:#d8e957}
+.note{margin-top:14px;max-width:72ch;color:#b4acc2;font-size:12.5px;line-height:1.75}
+body.day{background:radial-gradient(ellipse at 18% 0%,#f4f1f8 0%,#e9eef0 72%);color:#2a2836}
+body.day h1{color:#22202e}
+body.day .intro,body.day .note{color:#585366}
+body.day .stage{background:radial-gradient(ellipse at 75% 15%,rgba(176,157,191,.16),transparent 58%),linear-gradient(135deg,#faf9fc,#f2f6f6 58%,#f3f7f2);border-color:rgba(130,122,146,.24);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 12px 30px rgba(56,60,82,.09)}
+body.day .controls input{background:#ffffff;border-color:#b8b0c6;color:#262432;caret-color:#5b6e30}
+body.day .controls input::placeholder{color:#686276}
+body.day .controls input:focus{outline-color:#698d84;border-color:#698d84}
+body.day .btn-group{background:rgba(255,255,255,.72);border-color:rgba(140,132,158,.24)}
+body.day .controls button{color:#454054}
+body.day .controls button:hover{background:rgba(116,108,134,.1);color:#221f2c}
+body.day .controls button[aria-pressed="true"]{background:linear-gradient(115deg,#4b6f73,#6e5b7b);color:#ffffff;border-color:rgba(255,255,255,.45)}
+body.day .controls button.action-btn{background:#ffffff;border-color:#c2bacf;color:#383446}
+body.day .controls button.action-btn:hover{background:#f3f0f8;border-color:#a89fb8}
+body.day .status{background:rgba(83,107,97,.1);border-color:rgba(83,107,97,.26);color:#3a5249}
+body.day .status::before{background:#536b61;box-shadow:none}
+body.day .status[data-active="true"]{background:rgba(105,124,61,.13);border-color:rgba(105,124,61,.34);color:#465622}
+body.day .status[data-active="true"]::before{background:#697c3d}
+body::selection{background:#6e5b7b;color:#ffffff}
+@media(max-width:640px){body.preview-page{padding:24px 16px}.stage{padding:14px 14px 26px}h1{font-size:21px}.controls input{min-width:100%}.btn-group{width:100%;justify-content:space-between}.btn-group button{flex:1;white-space:nowrap}}
 </style>
 <body class="preview-page">
 <main>
-<h1>深海色 · 人物联动角饰</h1>
-<div class="intro">黑帽、红黑格围巾、薄荷键帽与灰紫发色，四角呼应人物，包在输入框外沿。</div>
+<div class="header-bar"><div><h1>深海色 · 触手召唤与绘卷角饰</h1><div class="intro">左上动态精二发光小触手怪与右上深海色同步打字联动，四角环绕深海吸盘触手、痛包小章鱼挂件与画笔流光。</div></div><div class="status" id="state-label">待机中</div></div>
 <div class="stage"><div id="candidate-root"></div></div>
-<div class="controls"><input id="demo-input" aria-label="预览输入" placeholder="输入字母，观察敲键盘与待机切换" autocomplete="off"><button id="normal">单行</button><button id="expand">展开候选</button><button id="next-page">下一组</button><button id="width-short">短条</button><button id="width-normal">普通</button><button id="width-long">长条</button><button id="width-extra">超长条</button><button id="dark-mode">深色</button><button id="light-mode">浅色</button><button id="preedit-toggle">隐藏示例拼音行</button></div>
-<div class="status" id="state-label">待机中</div>
-<div class="note">本机同版本候选窗前端预览，候选词为演示内容。四角装饰参考当前人物素材生成，固定大小并向外包住边缘，不进入文字区；底色采用灰紫与薄荷灰。默认显示拼音，关闭玻璃效果。</div>
+<div class="controls"><input id="demo-input" aria-label="预览输入" placeholder="输入字母，观察敲键盘与待机切换" autocomplete="off"><div class="btn-group" role="group" aria-label="候选展示模式"><button id="normal" aria-pressed="true">单行</button><button id="expand" aria-pressed="false">展开候选</button></div><button id="next-page" class="action-btn">下一组</button><div class="btn-group" role="group" aria-label="候选栏宽度"><button id="width-short" aria-pressed="false">短条</button><button id="width-normal" aria-pressed="true">普通</button><button id="width-long" aria-pressed="false">长条</button><button id="width-extra" aria-pressed="false">超长条</button></div><div class="btn-group" role="group" aria-label="深浅外观"><button id="dark-mode" aria-pressed="true">深色</button><button id="light-mode" aria-pressed="false">浅色</button></div><button id="preedit-toggle" class="action-btn" aria-pressed="true">隐藏示例拼音行</button></div>
+<div class="note">本机同版本候选窗前端预览，候选词为演示内容。四角外沿包裹深海色标志性的召唤物与画具（精二荧光小触手怪、巨型吸盘触手、痛包小章鱼挂件、画笔紫罗兰流光），展开多行时浮现深海触手暗纹；不占候选文字空间，默认显示拼音。</div>
 </main>
 <script src="native-preview.js"></script><script src="preview-config.js"></script>
 <script>
@@ -59,13 +89,15 @@ preview.normal();writePreviewPreedit('ni hao');
 </script>
 <script src="plugin/deepcolor-typing/dist/index.js"></script>
 <script>
+const setPressed=(ids,activeId)=>ids.forEach(id=>document.getElementById(id).setAttribute('aria-pressed',String(id===activeId)));
+const modeIds=['normal','expand'],widthIds=['width-short','width-normal','width-long','width-extra'],themeIds=['dark-mode','light-mode'];
 document.getElementById('demo-input').addEventListener('input',e=>preview.update(e.target.value));
-document.getElementById('normal').onclick=()=>{customCompactWords=null;preview.normal();};document.getElementById('expand').onclick=()=>preview.expand();
-document.getElementById('next-page').onclick=()=>preview.next();
+document.getElementById('normal').onclick=()=>{customCompactWords=null;preview.normal();setPressed(modeIds,'normal');setPressed(widthIds,'width-normal');};
+document.getElementById('expand').onclick=()=>{preview.expand();setPressed(modeIds,'expand');};
+document.getElementById('next-page').onclick=()=>{preview.next();if(!expanded)setPressed(widthIds,'width-normal');};
 
-document.getElementById('dark-mode').onclick=()=>{fcitx.setTheme(2);document.body.classList.remove('day');};
-document.getElementById('light-mode').onclick=()=>{fcitx.setTheme(1);document.body.classList.add('day');};
-
+document.getElementById('dark-mode').onclick=()=>{fcitx.setTheme(2);document.body.classList.remove('day');setPressed(themeIds,'dark-mode');};
+document.getElementById('light-mode').onclick=()=>{fcitx.setTheme(1);document.body.classList.add('day');setPressed(themeIds,'light-mode');};
 
 const compactCases={
  'width-short':['你好','你','呢'],
@@ -73,11 +105,10 @@ const compactCases={
  'width-long':['你好世界','今天的天气','明日方舟','深海色','万象拼音','保持专注','候选词','轻松输入','新的开始'],
  'width-extra':['这是较长候选词','让文字保持清晰','候选窗口随词变化','中间留白保持清晰','人物装饰固定大小','不同宽度同样自然','帽饰围巾呼应人物','原有圆角保持一致','长度改变也不变形']
 };
-for(const [id,words] of Object.entries(compactCases))document.getElementById(id).onclick=()=>{customCompactWords=words;pageIndex=0;preview.normal();};
+for(const [id,words] of Object.entries(compactCases))document.getElementById(id).onclick=()=>{customCompactWords=words;pageIndex=0;preview.normal();setPressed(modeIds,'normal');setPressed(widthIds,id);};
 
+document.getElementById('preedit-toggle').onclick=e=>{showPanelPreedit=!showPanelPreedit;writePreviewPreedit(document.getElementById('demo-input').value);e.target.textContent=showPanelPreedit?'隐藏示例拼音行':'显示示例拼音行';e.target.setAttribute('aria-pressed',String(showPanelPreedit));};
 
-document.getElementById('preedit-toggle').onclick=e=>{showPanelPreedit=!showPanelPreedit;writePreviewPreedit(document.getElementById('demo-input').value);e.target.textContent=showPanelPreedit?'隐藏示例拼音行':'显示示例拼音行';};
-
-new MutationObserver(()=>{document.getElementById('state-label').textContent=document.getElementById('fcitx-theme').dataset.dcState==='typing'?'正在敲键盘…':'待机中';}).observe(document.getElementById('fcitx-theme'),{attributes:true,attributeFilter:['data-dc-state']});
+new MutationObserver(()=>{const typing=document.getElementById('fcitx-theme').dataset.dcState==='typing';const el=document.getElementById('state-label');el.textContent=typing?'正在敲键盘…':'待机中';el.dataset.active=String(typing);}).observe(document.getElementById('fcitx-theme'),{attributes:true,attributeFilter:['data-dc-state']});
 window.previewReady=true;
 </script></body></html>

@@ -1,0 +1,41 @@
+{
+  "version": "2.1.1",
+  "verified": true,
+  "Advanced": {
+    "CopyHtml": "",
+    "PluginNotice": "True",
+    "Plugins": {
+      "0": "deepcolor-typing"
+    },
+    "UnsafeAPI": {
+      "EnableUnsafeCurlAPI": "False"
+    },
+    "UserCss": "fcitx:///file/css/deepcolor-character-v211/skin.css"
+  },
+  "Background": {
+    "Blur": "None",
+    "ImageUrl": "",
+    "KeepPanelColorWhenHasImage": "False",
+    "Shadow": "True"
+  },
+  "Size": {
+    "BorderRadius": "12",
+    "BorderWidth": "2",
+    "BottomPadding": "3",
+    "HighlightRadius": "8",
+    "HorizontalDividerWidth": "0",
+    "LabelTextGap": "3",
+    "LeftPadding": "5",
+    "Margin": "2",
+    "OverrideDefault": "True",
+    "RightPadding": "5",
+    "ScrollCellWidth": "56",
+    "TopPadding": "3",
+    "VerticalMinWidth": "280"
+  },
+  "onlyNativeConfigChange": "Advanced.UserCss",
+  "nativeCandidateGeometryUnchanged": true,
+  "pluginUnchanged": true,
+  "cornerArtUnchanged": true,
+  "assetHash": "3aa2f78f74045a2e727a01f332256c5bc116ce26991d7d594ca9328eba99c4a1"
+}

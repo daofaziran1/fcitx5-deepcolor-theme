@@ -1,0 +1,8 @@
+{
+  "name": "deepcolor-typing",
+  "version": "1.6.0",
+  "description": "Deepcolor chibi typing and idle mascot for Fcitx5 macOS",
+  "license": "GPL-3.0-or-later",
+  "private": true,
+  "main": "dist/index.js"
+}

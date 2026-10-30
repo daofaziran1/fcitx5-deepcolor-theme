@@ -1,0 +1,137 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* 深海色 v2.1.0 — character-linked outfit ornaments, fixed size, opaque background.
+   Native Fcitx configuration continues to own candidate geometry. */
+#fcitx-theme {
+  --scroll-animation: max-block-size 280ms cubic-bezier(.22,.61,.36,1);
+  --dc-corner-radius: 12px;
+  --dc-surface:
+    radial-gradient(ellipse at 100% 0%,rgba(176,157,191,.15),transparent 62%),
+    linear-gradient(112deg,#f5f3f8,#eef2f2 68%,#eef4ef);
+  --dc-popup: #f1eff5;
+  --dc-rim: linear-gradient(110deg,#b2c6c0,#b5a8c1 55%,#b9c59e);
+}
+#fcitx-theme.fcitx-dark {
+  --dc-surface:
+    radial-gradient(ellipse at 100% 0%,rgba(133,111,149,.12),transparent 62%),
+    linear-gradient(112deg,#242532,#2d2b38 58%,#243231);
+  --dc-popup: #292b37;
+  --dc-rim: linear-gradient(110deg,#91b8ab,#a294ad 55%,#a6b67b);
+}
+#fcitx-theme .fcitx-panel {
+  position: relative;
+  border-radius: var(--dc-corner-radius) !important;
+  background: var(--dc-surface) !important;
+}
+/* The fixed frame paints artwork at native viewport bounds. The measured
+   content panel keeps its original layout and native shadow geometry. */
+#fcitx-theme .dc-window-frame {
+  display: none;
+  position: fixed !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  transform: none !important;
+  transition: none !important;
+  pointer-events: none;
+  z-index: 0;
+}
+#fcitx-theme.dc-window-frame-active .dc-window-frame { display: block; }
+#fcitx-theme.dc-window-frame-active .dc-layout-panel {
+  background: transparent !important;
+  border-color: transparent !important;
+  clip-path: inset(0 round 12px) !important;
+}
+#fcitx-theme.dc-window-frame-active .dc-layout-panel::before,
+#fcitx-theme.dc-window-frame-active .dc-layout-panel::after { visibility: hidden; }
+#fcitx-theme .fcitx-panel-blur { position: relative; z-index: 1; }
+#fcitx-theme .fcitx-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  padding: 1px;
+  border-radius: inherit;
+  background: var(--dc-rim);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+/* Four source quadrants become four fixed caps. The center is omitted;
+   there are no image edge strips and no repeated middle section. */
+#fcitx-theme .fcitx-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border: 0 solid transparent;
+  border-image-source: url("assets/character-corners.png");
+  border-image-slice: 50%;
+  border-image-width: 30px;
+  border-image-repeat: stretch;
+  clip-path: inset(0 round 12px);
+  pointer-events: none;
+}
+#fcitx-theme .fcitx-contextmenu {
+  background: var(--dc-popup) !important;
+  border-radius: var(--dc-corner-radius) !important;
+}
+#fcitx-theme .fcitx-panel,
+#fcitx-theme .fcitx-contextmenu {
+  box-shadow: 0 8px 24px rgba(56,67,119,.22) !important;
+}
+#fcitx-theme.fcitx-dark .fcitx-panel,
+#fcitx-theme.fcitx-dark .fcitx-contextmenu {
+  box-shadow: 0 8px 24px rgba(0,0,0,.25) !important;
+}
+#fcitx-theme .fcitx-highlighted > .fcitx-candidate-inner {
+  background-image: linear-gradient(115deg,#537478,#776580);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.37),0 2px 6px rgba(74,91,151,.16);
+}
+#fcitx-theme.fcitx-dark .fcitx-highlighted > .fcitx-candidate-inner {
+  background-image: linear-gradient(115deg,#3f6266,#6a5576);
+  box-shadow: inset 0 0 0 1px rgba(221,232,204,.35),0 2px 6px rgba(0,0,0,.17);
+}
+#fcitx-theme .fcitx-horizontal-scroll > .fcitx-scroll-area {
+  animation: dc-unfold-fade 180ms ease-out;
+}
+#fcitx-theme.dc-theme .fcitx-panel-top {
+  position: relative;
+  height: 64px;
+  pointer-events: none;
+}
+.dc-mascot {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  right: 2px;
+  bottom: -8px;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+  contain: layout style;
+}
+.dc-sprite {
+  width: 100%; height: 100%;
+  background-size: 200% 200%;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  transform-origin: 50% 95%;
+}
+.dc-idle .dc-sprite { animation: dc-blink 5.6s steps(1,end) infinite; }
+.dc-typing .dc-sprite { animation: dc-type 260ms steps(1,end) infinite; }
+@keyframes dc-blink {
+  0%,91%,98%,100% { background-position: 0 0; transform: translate(0,0); }
+  93%,96% { background-position: 100% 0; transform: translate(2.584px,0); }
+}
+@keyframes dc-type {
+  0%,100% { background-position: 0 100%; transform: translate(.115px,.574px); }
+  50% { background-position: 100% 100%; transform: translate(2.699px,.574px); }
+}
+@keyframes dc-unfold-fade { from { opacity: .78; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  #fcitx-theme.dc-theme { --scroll-animation: none; }
+  #fcitx-theme .fcitx-horizontal-scroll > .fcitx-scroll-area { animation: none; }
+  .dc-mascot,.dc-sprite { animation: none !important; }
+  .dc-typing .dc-sprite { background-position: 0 100%; transform: translate(.115px,.574px); }
+}

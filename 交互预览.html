@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>深海色 · 人物联动角饰</title>
+<style>
+body.preview-page{margin:0;padding:32px 28px;width:auto;height:auto;min-height:100vh;overflow:auto;background:#0e1728;color:#e5efff;font-family:-apple-system,"PingFang SC",sans-serif;box-sizing:border-box}
+main{max-width:1480px;margin:auto}h1{margin:4px 0 10px;font-size:26px;font-weight:550;letter-spacing:.015em}.intro{font-size:13px;line-height:1.8;color:#b1c4df}
+.stage{margin:22px 0 18px;padding:20px 22px 32px;min-height:164px;background:#18253b;border:1px solid #334764;border-radius:18px;overflow:auto}#candidate-root{width:max-content;min-height:145px}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.controls input{min-width:220px;flex:1;padding:12px 14px;border:1px solid #526985;border-radius:8px;background:#16253c;color:#e5efff;font:14px -apple-system,"PingFang SC",sans-serif;caret-color:#9edfff}.controls input::placeholder{color:#acc0db}.controls input:focus{outline:2px solid #8fc6ff;outline-offset:2px}.controls button{padding:11px 13px;border:1px solid #526985;border-radius:8px;background:#1b2e49;color:#d5e6ff;font:12px -apple-system,"PingFang SC",sans-serif;cursor:pointer}.controls button:hover{background:#2c4566}.controls button:focus-visible{outline:2px solid #8fc6ff;outline-offset:2px}.status{margin-top:14px;color:#b1c4df;font-size:12px}.note{margin-top:12px;max-width:75ch;color:#a9bddb;font-size:12px;line-height:1.8}
+body.day{background:#eaf0f8;color:#203451}body.day .intro,body.day .note,body.day .status{color:#4c6281}body.day .stage{background:#f8faff;border-color:#c7d6e9}body.day .controls input{background:white;border-color:#9bb1cd;color:#203451}body.day .controls input::placeholder{color:#4e6482}body.day .controls button{background:#f6f9ff;color:#34547b;border-color:#9bb1cd}body.day .controls button:hover{background:#e1ecfb}
+body::selection{background:#7a9be0;color:white}
+@media(max-width:600px){body.preview-page{padding:24px 16px}.stage{padding:12px 12px 24px}h1{font-size:23px}.controls input{min-width:180px}.controls button{flex:1;white-space:nowrap}}
+
+
+
+</style>
+<body class="preview-page">
+<main>
+<h1>深海色 · 人物联动角饰</h1>
+<div class="intro">黑帽、红黑格围巾、薄荷键帽与灰紫发色，四角呼应人物，包在输入框外沿。</div>
+<div class="stage"><div id="candidate-root"></div></div>
+<div class="controls"><input id="demo-input" aria-label="预览输入" placeholder="输入字母，观察敲键盘与待机切换" autocomplete="off"><button id="normal">单行</button><button id="expand">展开候选</button><button id="next-page">下一组</button><button id="width-short">短条</button><button id="width-normal">普通</button><button id="width-long">长条</button><button id="width-extra">超长条</button><button id="dark-mode">深色</button><button id="light-mode">浅色</button><button id="preedit-toggle">隐藏示例拼音行</button></div>
+<div class="status" id="state-label">待机中</div>
+<div class="note">本机同版本候选窗前端预览，候选词为演示内容。四角装饰参考当前人物素材生成，固定大小并向外包住边缘，不进入文字区；底色采用灰紫与薄荷灰。默认显示拼音，关闭玻璃效果。</div>
+</main>
+<script src="native-preview.js"></script><script src="preview-config.js"></script>
+<script>
+window.nativeCalls=[];
+window.fcitx=function(name,...args){
+ nativeCalls.push({name,args,time:performance.now(),frame:window.previewFrame||0});
+ if(name==='scroll'){
+  if(args[0]===-1)window.preview.normal();
+  else if(window.preview)window.preview.feed(args[0],args[1]);
+ }
+};
+window.previewNativeBridge=window.fcitx;
+function countPreviewFrame(){window.previewFrame=(window.previewFrame||0)+1;requestAnimationFrame(countPreviewFrame);}
+requestAnimationFrame(countPreviewFrame);
+FcitxNative.initPanel(document.getElementById('candidate-root'));
+fcitx.setHost('macOS',26);fcitx.setLayout(0);fcitx.setWritingMode(0);fcitx.setTheme(2);
+previewConfig.Advanced.UserCss=new URL('deepcolor.css',location.href).href;
+fcitx.setStyle(JSON.stringify(previewConfig));
+const wordPool=['你好','你','呢','拟','泥','逆','霓','匿','腻','倪','你们','您好','你好呀','你好世界','你的','你说','你看','你想','拟合','逆光','泥土','霓虹','你好吗','世界','今天','天气','很好','明日方舟','深海色','万象拼音','小鹤双拼','保持专注','输入法','候选词','安静','清晰','简单','文字','谢谢','再见','晚安','新的开始','轻松输入','海风','潮汐','画笔','灵感','海盐','蓝色','紫色','下一页','翻页','多行候选','非常长的候选词也能正常显示','代码','设计','键盘','待机','呼吸','眨眼','自然','流畅','边框','留白','你也一样'];
+let expanded=false,pageIndex=0,showPanelPreedit=true;
+const writePreviewPreedit=text=>fcitx.updateInputPanel(showPanelPreedit?[[text||'ni hao',0]]:[],true,[],[],[]);
+let customCompactWords=null;
+const make=(text,i,label=true)=>({text,label:label?String(i+1):'',comment:'',actions:[],spaceBetweenComment:true});
+window.preview={
+ normal(){expanded=false;const start=(pageIndex%3)*9;fcitx.setCandidates((customCompactWords||wordPool.slice(start,start+9)).map((s,i)=>make(s,i)),0,true,pageIndex>0,true,1,false,false,[]);},
+ expand(){expanded=true;fcitx.setCandidates(wordPool.slice(0,54).map((s,i)=>make(s,i,false)),-1,false,false,false,2,true,false,[]);},
+ feed(start,length){expanded=true;const words=wordPool.slice(start,start+length);fcitx.setCandidates(words.map((s,i)=>make(s,i,false)),-1,false,false,false,2,start===0,start+length>=wordPool.length,[]);},
+ next(){if(expanded)fcitx.scrollKeyAction(17);else{customCompactWords=null;pageIndex++;this.normal();}},
+ update(text){writePreviewPreedit(text);if(expanded)this.expand();else this.normal();},
+ setConfig(config){config.Advanced.UserCss=config.Advanced.UserCss||new URL('deepcolor.css',location.href).href;fcitx.setStyle(JSON.stringify(config));},
+ setWords(texts){expanded=true;fcitx.setCandidates(texts.map((s,i)=>make(s,i,false)),-1,false,false,false,2,true,true,[]);}
+};
+preview.normal();writePreviewPreedit('ni hao');
+</script>
+<script src="plugin/deepcolor-typing/dist/index.js"></script>
+<script>
+document.getElementById('demo-input').addEventListener('input',e=>preview.update(e.target.value));
+document.getElementById('normal').onclick=()=>{customCompactWords=null;preview.normal();};document.getElementById('expand').onclick=()=>preview.expand();
+document.getElementById('next-page').onclick=()=>preview.next();
+
+document.getElementById('dark-mode').onclick=()=>{fcitx.setTheme(2);document.body.classList.remove('day');};
+document.getElementById('light-mode').onclick=()=>{fcitx.setTheme(1);document.body.classList.add('day');};
+
+
+const compactCases={
+ 'width-short':['你好','你','呢'],
+ 'width-normal':null,
+ 'width-long':['你好世界','今天的天气','明日方舟','深海色','万象拼音','保持专注','候选词','轻松输入','新的开始'],
+ 'width-extra':['这是较长候选词','让文字保持清晰','候选窗口随词变化','中间留白保持清晰','人物装饰固定大小','不同宽度同样自然','帽饰围巾呼应人物','原有圆角保持一致','长度改变也不变形']
+};
+for(const [id,words] of Object.entries(compactCases))document.getElementById(id).onclick=()=>{customCompactWords=words;pageIndex=0;preview.normal();};
+
+
+document.getElementById('preedit-toggle').onclick=e=>{showPanelPreedit=!showPanelPreedit;writePreviewPreedit(document.getElementById('demo-input').value);e.target.textContent=showPanelPreedit?'隐藏示例拼音行':'显示示例拼音行';};
+
+new MutationObserver(()=>{document.getElementById('state-label').textContent=document.getElementById('fcitx-theme').dataset.dcState==='typing'?'正在敲键盘…':'待机中';}).observe(document.getElementById('fcitx-theme'),{attributes:true,attributeFilter:['data-dc-state']});
+window.previewReady=true;
+</script></body></html>

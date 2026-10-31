@@ -2,6 +2,8 @@
 
 当前版本：**v2.3.0**（双角色 MiniMax-H3 视频级 24 帧联动动画 · 触手与精二棱镜四角外饰 · 自适应深海画卷内景）
 
+**Windows 用户**：万象拼音可以通过小狼毫安装，但本仓库的角色动画主题目前不支持 Windows 系统候选窗。请先阅读下方「Windows：万象拼音安装与动态主题兼容性」，不要直接运行 macOS 的 `.command` 脚本。
+
 ![动态预览](动态预览.webp)
 
 ## 声明
@@ -90,6 +92,62 @@ python3 -m http.server 8794 --bind 127.0.0.1
 ### 4. 回退上一版主题
 
 双击运行 `恢复上一版主题.command`（或终端执行 `./恢复上一版主题.command`）即可恢复切换前的配置。
+
+### 5. Windows：万象拼音安装与动态主题兼容性
+
+#### 兼容范围
+
+**万象拼音是 Rime 输入方案，不是候选窗前端；安装万象不会让小狼毫获得 Fcitx5 Webpanel 的主题能力。**
+
+| 使用环境 | 万象中文输入 | 本仓库双角色动画、图片角饰与打字联动 |
+| --- | --- | --- |
+| macOS：Fcitx5 macOS + Webpanel | 可安装万象方案 | 本仓库原生支持，按上文部署 |
+| Windows：小狼毫（Weasel） | 支持，按下文安装 | 不支持；不能导入 `deepcolor.css` 或 `deepcolor-typing` 插件 |
+| Windows：浏览器打开 `交互预览.html` | 预览页不是系统输入法 | 可以预览动画，但不会替换其他应用中的系统候选窗 |
+
+原因与上游依据：
+
+- [小狼毫定制文档](https://github.com/rime/weasel/wiki/Weasel-定制化)提供 YAML 配色、字体和布局配置，不提供本主题依赖的 Webpanel CSS／JavaScript 插件接口。
+- [fcitx5-webview 平台实现](https://github.com/fcitx-contrib/fcitx5-webview/blob/master/src/platform.cpp)仅包含 macOS、Linux 和 Emscripten 分支，其他平台会触发 `#error "Unsupported platform"`；底层 WebView 支持 Windows，不等于这一候选窗集成已经支持 Windows。
+- [Fcitx5 JS](https://github.com/fcitx-contrib/fcitx5-js)的网页／浏览器扩展方案也不能据此视为 Windows 全局 TSF 输入法前端。
+
+因此，本仓库**不提供声称能在官方小狼毫中启用原版角色动画的一键安装命令**。仅转换颜色会丢失角色动画、图片角饰与打字联动，不是原主题的完整移植。若必须保留这些效果，目前不能按小狼毫配色教程完成安装；需要另有可接入 Windows 系统输入、并实现兼容候选窗及插件 API 的前端。
+
+#### 安装 Windows 万象拼音
+
+以下步骤只安装中文输入能力，不会安装上述动态主题。参考[万象官方小狼毫部署指南](https://amzxyz.github.io/rime-wanxiang/doc/weasel.html)。
+
+1. 从[小狼毫官方 Releases](https://github.com/rime/weasel/releases)下载安装包。安装选项选择「中文（简体，中国大陆）」；已有可用小狼毫时无需重复安装。若 `Win + 空格` 的列表中没有「小狼毫」，在 Windows「设置 → 时间和语言 → 语言和区域 → 中文（简体，中国大陆）→ 语言选项 → 添加键盘」中检查并添加。
+2. 右键小狼毫托盘图标，打开「用户文件夹」。默认路径是 `%APPDATA%\Rime`；若安装时自定义了路径，以实际用户目录为准。
+3. **升级前备份整个用户目录，并先退出算法框架。** 不要删除个人词库、`*.userdb`、自定义短语或已有 `*.custom.yaml`。默认路径可在 PowerShell 中备份：
+
+   ```powershell
+   $rime = Join-Path $env:APPDATA 'Rime'
+   $backup = "$rime-backup-$(Get-Date -Format yyyyMMdd-HHmmss)"
+   robocopy $rime $backup /E /R:0 /W:0 /XF nul
+   if ($LASTEXITCODE -ge 8) { throw '备份失败，请先处理错误再继续' }
+   ```
+
+   `/XF nul` 仅跳过旧缓存中可能存在的 Windows 保留设备文件名；Robocopy 退出码 `0–7` 不表示复制失败。自定义用户目录时，应先将 `$rime` 改为该目录。
+4. 从[万象官方 Releases](https://github.com/amzxyz/rime-wanxiang/releases)下载方案包。首次安装通常选择 **Base（`rime-wanxiang-base.zip`）**；已有 Pro／双拼／辅助码用户应保留原输入习惯，按官方版本说明选择对应方案，不要直接用 Base 覆盖 Pro 配置。
+5. 解压后将方案文件放在用户目录根部，而不是再套一层 ZIP 目录。Base 的 `wanxiang.schema.yaml`、`dicts`、`lua` 等应直接位于该目录。对照已有 `default.yaml`、`default.custom.yaml`、`weasel.yaml`、`weasel.custom.yaml` 合并设置；不要不加检查地覆盖全局快捷键、方案列表或外观配置。其他仍在使用的方案也应保留。
+6. 按[万象官方部署指南中的「下载语法模型」链接](https://amzxyz.github.io/rime-wanxiang/doc/weasel.html#_3)下载 `wanxiang-lts-zh-hans.gram`，放到同一用户目录根部。模型下载位置以官方指南为准，不要假定 GitHub 存在名为 `model` 的 Release。更新模型前先退出算法框架，避免文件占用。
+7. 启动小狼毫并在托盘菜单选择「重新部署」，等待编译完成。若旧编译缓存导致异常，先退出算法框架，将用户目录的 `build` 改名保留，再重新部署；不要为清缓存删除用户词库。
+8. 按 `Win + 空格` 切到小狼毫，用 `Ctrl + 反引号` 或 `F4` 打开方案菜单选择万象。在记事本中按所选全拼／双拼编码输入，确认出现候选词并能按空格上屏。只有完成实际中文上屏，才算安装验证通过。
+
+#### 在 Windows 查看原版动画
+
+仅用于查看效果，**不是系统主题安装**。安装 Python 3 后，在仓库根目录运行：
+
+```powershell
+py -3 -m http.server 8794 --bind 127.0.0.1
+```
+
+浏览器打开 `http://127.0.0.1:8794/交互预览.html`，在页面输入框中打字；页面使用示例候选演示角色待机／打字动画，不与小狼毫候选词连接。结束时在终端按 `Ctrl + C` 关闭服务。无需复制 CSS 到 Rime 用户目录，也不要把 `.command` 改名为 `.bat` 执行。
+
+#### 回退与数据保留
+
+只安装／部署万象不会修改本仓库的 macOS 配置。需要恢复 Windows 输入方案时，先退出小狼毫算法框架，保留当前用户目录，再从自己的备份恢复配置及词库，重新启动并部署。升级后已经新增的用户词条应先同步／导出，避免整目录回退覆盖新数据。
 
 ---
 
